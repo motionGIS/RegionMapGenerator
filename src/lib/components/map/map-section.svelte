@@ -7,6 +7,7 @@
 	import StateSelector from "./state-selector.svelte";
 	import GpxUploader from "./gpx-uploader.svelte";
 	import MapPreview from "./map-preview.svelte";
+    import StatesAndProvincesPreview from "./states-and-provinces-preview.svelte";
 
 	// Selected states and GPX data
 	let selectedStates: string[] = $state([]);
@@ -19,7 +20,7 @@
 	};
 </script>
 
-<section id="map" class="container py-20">
+<section id="map" class="container py-10">
 	<div class="grid gap-8 lg:grid-cols-2">
 		<!-- Map Controls -->
 		<div class="flex flex-col gap-4">
@@ -31,8 +32,18 @@
 					<StateSelector bind:selectedStates />
 				</CardContent>
 			</Card>
+		</div>
 
-			<Card>
+		<div class="flex flex-col gap-4">
+		<Card>
+			<CardHeader>
+				<CardTitle>Map Preview</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<StatesAndProvincesPreview bind:selectedStates />
+			</CardContent>
+		</Card>
+		<Card>
 				<CardHeader>
 					<CardTitle>GPX Traces</CardTitle>
 				</CardHeader>
@@ -59,15 +70,5 @@
 				</CardContent>
 			</Card>
 		</div>
-
-		<!-- Map Preview -->
-		<Card>
-			<CardHeader>
-				<CardTitle>Map Preview</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<MapPreview {selectedStates} {gpxTraces} />
-			</CardContent>
-		</Card>
 	</div>
 </section>
