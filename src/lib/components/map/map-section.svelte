@@ -11,7 +11,7 @@
 
 	// Selected states and GPX data
 	let selectedStates: string[] = $state([]);
-	let gpxTraces: { id: string; color: string; data: string }[] = $state([]);
+	let gpxTraces: { id: string; color: string; data: string; name: string }[] = $state([]);
 
 	/** Handle map download */
 	const handleDownload = (format: "svg" | "png") => {
@@ -36,9 +36,6 @@
 
 		<div class="flex flex-col gap-3">
 			<Card>
-				<CardHeader>
-					<CardTitle>GPX Traces</CardTitle>
-				</CardHeader>
 				<CardContent>
 					<GpxUploader bind:gpxTraces />
 				</CardContent>
@@ -46,7 +43,7 @@
 		<Card>
 			<CardContent>
 				<CardTitle>Preview</CardTitle>
-				<StatesAndProvincesPreview {selectedStates} />
+				<StatesAndProvincesPreview {selectedStates} {gpxTraces}/>
 					<div class="flex gap-4">
 						<Button onclick={() => handleDownload("png")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
 							<DownloadIcon />

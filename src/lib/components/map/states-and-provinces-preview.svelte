@@ -12,13 +12,17 @@
   import { Checkbox } from "$lib/components/ui/checkbox/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { Switch } from "$lib/components/ui/switch";
+  import * as toGeoJSON from '@tmcw/togeojson';
 
   let globeBool = $state(true);
   let projection = $derived(globeBool ? "globe" : "mercator");
 
   const statesToNames: Record<string, string> = statesToNamesJson;
 
-  const { selectedStates = [] } = $props<{ selectedStates?: string[] }>();
+  const { selectedStates = [], gpxTraces = [] } = $props<{
+    selectedStates?: string[];
+    gpxTraces?: { id: string; color: string; data: string; name: string }[];
+  }>();
   let fillColor = $state('#000000');
   let borderColor = $state('#ffffff');
 
@@ -77,6 +81,35 @@
       }
     }
   });
+
+  const gpxFeatures = $derived(() =>
+    gpxTraces
+      .map((trace: { data: string; color: any; id: any; name: any; }) => {
+        try {
+          const dom = new window.DOMParser().parseFromString(trace.data, "application/xml");
+          const geojson = toGeoJSON.gpx(dom);
+          return geojson.features
+            .filter(f => f.geometry.type === "LineString")
+            .map(f => ({
+              ...f,
+              properties: {
+                ...(f.properties || {}),
+                color: trace.color,
+                id: trace.id,
+                name: trace.name
+              }
+            }));
+        } catch (e) {
+          return [];
+        }
+      })
+      .flat()
+  );
+
+  const gpxFeatureCollection = $derived(() => ({
+    type: "FeatureCollection",
+    features: Array.isArray(gpxFeatures()) ? gpxFeatures() : []
+  }));
 </script>
 
 <div class="flex items-center space-x-2">
@@ -128,4 +161,13 @@
     }}
   />
 </GeoJSON>
+  <GeoJSON id="gpx-traces" data={gpxFeatureCollection()}>
+    <LineLayer
+      paint={{
+        // Use the color property from each feature
+        "line-color": ["get", "color"],
+        "line-width": 3
+      }}
+    />
+  </GeoJSON>
 </MapLibre>

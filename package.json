@@ -34,6 +34,7 @@
 		]
 	},
 	"dependencies": {
+		"@tmcw/togeojson": "^7.1.1",
 		"lucide-svelte": "^0.511.0",
 		"maplibre-gl": "^5.5.0",
 		"svelte-maplibre": "^1.0.0"
