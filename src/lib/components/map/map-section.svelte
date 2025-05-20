@@ -58,11 +58,11 @@
 				</CardHeader>
 				<CardContent>
 					<div class="flex gap-4">
-						<Button onClick={() => handleDownload("svg")} disabled={selectedStates.length === 0} class="flex-1 gap-2">
+						<Button onclick={() => handleDownload("svg")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
 							<DownloadIcon />
 							Export SVG
 						</Button>
-						<Button onClick={() => handleDownload("png")} disabled={selectedStates.length === 0} class="flex-1 gap-2">
+						<Button onclick={() => handleDownload("png")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
 							<DownloadIcon />
 							Export PNG
 						</Button>
