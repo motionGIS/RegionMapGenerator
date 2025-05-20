@@ -21,12 +21,12 @@
 </script>
 
 <section id="map" class="container py-10">
-	<div class="grid gap-8 lg:grid-cols-2">
+	<div class="grid gap-4 lg:grid-cols-2">
 		<!-- Map Controls -->
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-3">
 			<Card>
 				<CardHeader>
-					<CardTitle>Select States</CardTitle>
+					<CardTitle>Select States/Provinces/Territories</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<StateSelector bind:selectedStates />
@@ -34,16 +34,8 @@
 			</Card>
 		</div>
 
-		<div class="flex flex-col gap-4">
-		<Card>
-			<CardHeader>
-				<CardTitle>Map Preview</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<StatesAndProvincesPreview {selectedStates} />
-			</CardContent>
-		</Card>
-		<Card>
+		<div class="flex flex-col gap-3">
+			<Card>
 				<CardHeader>
 					<CardTitle>GPX Traces</CardTitle>
 				</CardHeader>
@@ -51,24 +43,18 @@
 					<GpxUploader bind:gpxTraces />
 				</CardContent>
 			</Card>
-
-			<Card>
-				<CardHeader>
-					<CardTitle>Export Map</CardTitle>
-				</CardHeader>
-				<CardContent>
+		<Card>
+			<CardContent>
+				<CardTitle>Preview</CardTitle>
+				<StatesAndProvincesPreview {selectedStates} />
 					<div class="flex gap-4">
-						<Button onclick={() => handleDownload("svg")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
-							<DownloadIcon />
-							Export SVG
-						</Button>
 						<Button onclick={() => handleDownload("png")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
 							<DownloadIcon />
 							Export PNG
 						</Button>
 					</div>
-				</CardContent>
-			</Card>
+			</CardContent>
+		</Card>
 		</div>
 	</div>
 </section>
