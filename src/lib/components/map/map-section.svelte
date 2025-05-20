@@ -40,7 +40,7 @@
 				<CardTitle>Map Preview</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<StatesAndProvincesPreview bind:selectedStates />
+				<StatesAndProvincesPreview {selectedStates} />
 			</CardContent>
 		</Card>
 		<Card>
