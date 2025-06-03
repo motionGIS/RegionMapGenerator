@@ -16,38 +16,77 @@
     // Reference to the StatesAndProvincesPreview component
     let mapPreviewComponent: StatesAndProvincesPreview;
 
-    /** Handle map download */
-    const handleDownload = (format: "svg" | "png") => {
-        if (format === "png") {
-            const map = mapPreviewComponent?.map;
-            if (!map) {
-                console.error("Map not loaded yet");
-                return;
-            }
-
-            // Wait for the map to finish rendering
-            map.once('idle', () => {
-                try {
-                    // Get the canvas and convert to high-res PNG
-                    const canvas = map.getCanvas();
-                    const dataURL = canvas.toDataURL('image/png', 1.0); // 1.0 = highest quality
-
-                    // Create download link
-                    const link = document.createElement('a');
-                    link.href = dataURL;
-                    link.download = `map-export-${new Date().toISOString().slice(0, 10)}.png`;
-                    
-                    // Trigger download
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                } catch (error) {
-                    console.error('Error exporting map:', error);
-                }
-            });
-
-            map.triggerRepaint();
+    const handleDownload = (resolution: 2 | 4 | 8) => {
+        const map = mapPreviewComponent?.map;
+        if (!map) {
+            console.error("Map not loaded yet");
+            return;
         }
+
+        // Wait for the map to finish rendering
+        map.once('idle', () => {
+            try {
+                const canvas = map.getCanvas();
+                const originalPixelRatio = window.devicePixelRatio;
+                
+                // Set pixel ratio for desired resolution
+                Object.defineProperty(window, 'devicePixelRatio', {
+                    get() { return resolution; }
+                });
+
+                // Get original canvas size
+                const originalWidth = canvas.width;
+                const originalHeight = canvas.height;
+
+                // Resize canvas to new resolution
+                map.getCanvasContainer().style.width = canvas.style.width;
+                map.getCanvasContainer().style.height = canvas.style.height;
+                
+                // Trigger a resize to apply the new pixel ratio
+                map.resize();
+
+                // Wait for the high-res render to complete
+                map.once('render', () => {
+                    try {
+                        // Export the high-resolution canvas
+                        const dataURL = canvas.toDataURL('image/png', 1.0);
+
+                        // Restore original pixel ratio
+                        Object.defineProperty(window, 'devicePixelRatio', {
+                            get() { return originalPixelRatio; }
+                        });
+
+                        // Resize back to original
+                        map.resize();
+
+                        // Create download link
+                        const link = document.createElement('a');
+                        link.href = dataURL;
+                        link.download = `map-export-${resolution}x-${new Date().toISOString().slice(0, 10)}.png`;
+                        
+                        // Trigger download
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } catch (error) {
+                        console.error(`Error exporting ${resolution}x map:`, error);
+                        
+                        // Restore original pixel ratio on error
+                        Object.defineProperty(window, 'devicePixelRatio', {
+                            get() { return originalPixelRatio; }
+                        });
+                        map.resize();
+                    }
+                });
+
+                // Trigger re-render at high resolution
+                map.triggerRepaint();
+            } catch (error) {
+                console.error('Error setting up high-res export:', error);
+            }
+        });
+
+        map.triggerRepaint();
     };
 </script>
 
@@ -75,10 +114,18 @@
             <CardContent>
                 <CardTitle>Preview</CardTitle>
                 <StatesAndProvincesPreview bind:this={mapPreviewComponent} {selectedStates} {gpxTraces}/>
-                    <div class="flex gap-4">
-                        <Button onclick={() => handleDownload("png")} disabled={selectedStates.length === 0} class="flex-1 gap-2 {selectedStates.length === 0 ? '' :'cursor-pointer'}">
+                    <div class="flex flex-col md:flex-row gap-2">
+                        <Button onclick={() => handleDownload(2)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
                             <DownloadIcon />
-                            Export PNG
+							Export PNG (1x res) 
+                        </Button>
+                        <Button onclick={() => handleDownload(4)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
+                            <DownloadIcon />
+                            Export PNG (2x res) 
+                        </Button>
+                        <Button onclick={() => handleDownload(8)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
+                            <DownloadIcon />
+                            Export PNG (4x res)
                         </Button>
                     </div>
             </CardContent>

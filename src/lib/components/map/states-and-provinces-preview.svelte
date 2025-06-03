@@ -29,9 +29,12 @@
   let showBorder = $state(true);
   let showFill = $state(true);
 
+  let displayBorderColor = $derived(() => showBorder ? borderColor : 'rgba(0,0,0,0)');
+  let displayFillColor = $derived(() => showFill ? fillColor : 'rgba(0,0,0,0)');
+
   let map: maplibregl.Map | undefined = $state();
   let loaded = $state(false);
-  
+
   export { map };
 
   const allowedNames = $derived(() =>
@@ -144,14 +147,14 @@
   <FillLayer
     {filter}
     paint={{
-      "fill-color": fillColor,
+      "fill-color": displayFillColor(),
       "fill-opacity": 1
     }}
   />
   <LineLayer
     {filter}
     paint={{
-      "line-color": borderColor,
+    "line-color": displayBorderColor(),
       "line-width": 2
     }}
   />
