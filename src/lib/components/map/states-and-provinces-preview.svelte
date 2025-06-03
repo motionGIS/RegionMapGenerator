@@ -19,10 +19,12 @@
 
   const statesToNames: Record<string, string> = statesToNamesJson;
 
-  const { selectedStates = [], gpxTraces = [] } = $props<{
+    const { selectedStates = [], gpxTraces = [], gpxTraceWidth = 3 } = $props<{
     selectedStates?: string[];
     gpxTraces?: { id: string; color: string; data: string; name: string }[];
+    gpxTraceWidth?: number;
   }>();
+
   let fillColor = $state('#000000');
   let borderColor = $state('#ffffff');
 
@@ -171,7 +173,7 @@
       paint={{
         // Use the color property from each feature
         "line-color": ["get", "color"],
-        "line-width": 3
+        "line-width": gpxTraceWidth
       }}
     />
   </GeoJSON>
