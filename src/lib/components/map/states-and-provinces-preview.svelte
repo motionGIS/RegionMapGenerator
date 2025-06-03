@@ -31,6 +31,8 @@
 
   let map: maplibregl.Map | undefined = $state();
   let loaded = $state(false);
+  
+  export { map };
 
   const allowedNames = $derived(() =>
     selectedStates.map((code: string | number) => statesToNames[code]).filter(Boolean)
