@@ -3,17 +3,17 @@
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
+	import { Slider } from "$lib/components/ui/slider";
     import { MapPinIcon, DownloadIcon, UploadIcon } from "lucide-svelte";
     import StateSelector from "./state-selector.svelte";
     import GpxUploader from "./gpx-uploader.svelte";
     import MapPreview from "./map-preview.svelte";
     import StatesAndProvincesPreview from "./states-and-provinces-preview.svelte";
 
-    // Selected states and GPX data
     let selectedStates: string[] = $state([]);
     let gpxTraces: { id: string; color: string; data: string; name: string }[] = $state([]);
+    let gpxTraceWidth: number = $state(3);
 
-    // Reference to the StatesAndProvincesPreview component
     let mapPreviewComponent: StatesAndProvincesPreview;
 
     const handleDownload = (resolution: 2 | 4 | 8) => {
@@ -108,28 +108,49 @@
             <Card>
                 <CardContent>
                     <GpxUploader bind:gpxTraces />
+                    
+                    {#if gpxTraces.length > 0}
+                        <div class="mt-4 space-y-2">
+                            <Label for="gpx-width">Trace Weight: {gpxTraceWidth}px</Label>
+                            <Slider
+                                id="gpx-width"
+                                min={1}
+                                max={10}
+                                step={0.5}
+                                value={[gpxTraceWidth]}
+                                onValueChange={(value) => gpxTraceWidth = value[0]}
+                                class="w-full"
+                            />
+                        </div>
+                    {/if}
                 </CardContent>
             </Card>
-        <Card>
-            <CardContent>
-                <CardTitle>Preview</CardTitle>
-                <StatesAndProvincesPreview bind:this={mapPreviewComponent} {selectedStates} {gpxTraces}/>
-                    <div class="flex flex-col md:flex-row gap-2">
+            
+            <Card>
+                <CardContent>
+                    <CardTitle>Preview</CardTitle>
+                    <StatesAndProvincesPreview 
+                        bind:this={mapPreviewComponent} 
+                        {selectedStates} 
+                        {gpxTraces}
+                        {gpxTraceWidth}
+                    />
+                    <div class="flex flex-col md:flex-row gap-2 mt-2">
                         <Button onclick={() => handleDownload(2)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
                             <DownloadIcon />
-							Export PNG (1x res) 
+                            PNG (1x resolution)
                         </Button>
                         <Button onclick={() => handleDownload(4)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
                             <DownloadIcon />
-                            Export PNG (2x res) 
+                            PNG (2x resolution)
                         </Button>
                         <Button onclick={() => handleDownload(8)} disabled={selectedStates.length === 0} class="flex-1 gap-2">
                             <DownloadIcon />
-                            Export PNG (4x res)
+                            PNG (4x resolution)
                         </Button>
                     </div>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
         </div>
     </div>
 </section>
