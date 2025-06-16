@@ -11,6 +11,9 @@ importers:
       '@tmcw/togeojson':
         specifier: ^7.1.1
         version: 7.1.1
+      bits-ui:
+        specifier: 1.5.0
+        version: 1.5.0(svelte@5.31.1)
       lucide-svelte:
         specifier: ^0.511.0
         version: 0.511.0(svelte@5.31.1)
@@ -39,9 +42,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.0
         version: 4.1.7(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1))
-      bits-ui:
-        specifier: ^2.4.1
-        version: 2.4.1(@internationalized/date@3.8.1)(svelte@5.31.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -283,11 +283,11 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@floating-ui/core@1.7.0':
-    resolution: {integrity: sha512-FRdBLykrPPA6P76GGGqlex/e7fbe0F1ykgxHYNXQsH/iTEtjMj/f9bpY5oQqbjt5VgZvgz/uKXbGuROijh3VLA==}
+  '@floating-ui/core@1.7.1':
+    resolution: {integrity: sha512-azI0DrjMMfIug/ExbBaeDVJXcY0a7EPvPjb2xAJPa4HeimBX+Z18HK8QQR3jb6356SnDDdxx+hinMLcJEDdOjw==}
 
-  '@floating-ui/dom@1.7.0':
-    resolution: {integrity: sha512-lGTor4VlXcesUMh1cupTUTDoCxMb0V6bm3CnxHzQcw8Eaf1jQbgQX4i02fYgT0vJ82tb5MZ4CZk1LRGkktJCzg==}
+  '@floating-ui/dom@1.7.1':
+    resolution: {integrity: sha512-cwsmW/zyw5ltYTUeeYJ60CnQuPqmGwuGVhG9w0PRaRKkAyi38BT5CKrpIbb+jtahSwUl04cWzSx9ZOIxeS6RsQ==}
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
@@ -744,12 +744,11 @@ packages:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
 
-  bits-ui@2.4.1:
-    resolution: {integrity: sha512-Z0qZkPgtxP5dkEOyZqCK2PQ1oFXsD0AlfFMtsrMLJqaYtjUBoQGosHVKEH03M9q4G8kxVnG74Zb0F9pS0X4+6w==}
-    engines: {node: '>=20', pnpm: '>=8.7.0'}
+  bits-ui@1.5.0:
+    resolution: {integrity: sha512-53hxHPohzwgnUYlFwklFu9ESB7KbH2Kb0ekk8Y5CPLRNpnZj26kH3sfV+4MFkC3g5oIztLqAtgYlg0sSbIcZzQ==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      '@internationalized/date': ^3.8.1
-      svelte: ^5.33.0
+      svelte: ^5.11.0
 
   blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
@@ -787,9 +786,6 @@ packages:
   cookie@0.7.2:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
-
-  css.escape@1.5.1:
-    resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
 
   d3-array@3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
@@ -1121,8 +1117,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  runed@0.28.0:
-    resolution: {integrity: sha512-k2xx7RuO9hWcdd9f+8JoBeqWtYrm5CALfgpkg2YDB80ds/QE4w0qqu34A7fqiAwiBBSBQOid7TLxwxVC27ymWQ==}
+  runed@0.23.4:
+    resolution: {integrity: sha512-9q8oUiBYeXIDLWNK5DfCWlkL0EW3oGbk845VdKlPeia28l751VpfesaB/+7pI6rnbx1I6rqoZ2fZxptOJLxILA==}
     peerDependencies:
       svelte: ^5.7.0
 
@@ -1167,8 +1163,8 @@ packages:
     resolution: {integrity: sha512-KXDYZ9dszj6bzvnEMRYvxgeTHU74QBFL54XKtP3nyMuJ81CFYtABZ3bAzL2EdFUaEwJOBOgENyFj3R7oTzDyyw==}
     engines: {node: '>=4', npm: '>=6'}
 
-  style-to-object@1.0.8:
-    resolution: {integrity: sha512-xT47I/Eo0rwJmaXC4oilDGDWLohVhR6o/xAQcPQN8q6QBuZVL8qMYL85kLmST5cPjAorwvqIA4qXTRQoYHaL6g==}
+  style-to-object@1.0.9:
+    resolution: {integrity: sha512-G4qppLgKu/k6FwRpHiGiKPaPTFcG3g4wNVX/Qsfu+RqQM30E7Tyu/TEgxcL9PNLF5pdRLwQdE3YKKf+KF2Dzlw==}
 
   supercluster@8.0.1:
     resolution: {integrity: sha512-IiOea5kJ9iqzD2t7QJq/cREyLHTtSmUT6gQsweojg9WH2sYJqZK9SswTu6jrscO6D1G5v5vYZ9ru/eq85lXeZQ==}
@@ -1196,11 +1192,11 @@ packages:
       '@deck.gl/mapbox':
         optional: true
 
-  svelte-toolbelt@0.9.1:
-    resolution: {integrity: sha512-wBX6MtYw/kpht80j5zLpxJyR9soLizXPIAIWEVd9llAi17SR44ZdG291bldjB7r/K5duC0opDFcuhk2cA1hb8g==}
+  svelte-toolbelt@0.7.1:
+    resolution: {integrity: sha512-HcBOcR17Vx9bjaOceUvxkY3nGmbBmCBBbuWLLEWO6jtmWH8f/QoWmbyUfQZrpDINH39en1b8mptfPQT9VKQ1xQ==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      svelte: ^5.30.2
+      svelte: ^5.0.0
 
   svelte@5.31.1:
     resolution: {integrity: sha512-09fup3U7NQobUCUJnLhed6pxG6MzUS8rPsALB5Jr8m8u3pVKITs0ejYiKS/wsVjfkXHvKc2g260KA8o7dWypHA==}
@@ -1484,13 +1480,13 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@floating-ui/core@1.7.0':
+  '@floating-ui/core@1.7.1':
     dependencies:
       '@floating-ui/utils': 0.2.9
 
-  '@floating-ui/dom@1.7.0':
+  '@floating-ui/dom@1.7.1':
     dependencies:
-      '@floating-ui/core': 1.7.0
+      '@floating-ui/core': 1.7.1
       '@floating-ui/utils': 0.2.9
 
   '@floating-ui/utils@0.2.9': {}
@@ -1865,16 +1861,15 @@ snapshots:
 
   axobject-query@4.1.0: {}
 
-  bits-ui@2.4.1(@internationalized/date@3.8.1)(svelte@5.31.1):
+  bits-ui@1.5.0(svelte@5.31.1):
     dependencies:
-      '@floating-ui/core': 1.7.0
-      '@floating-ui/dom': 1.7.0
+      '@floating-ui/core': 1.7.1
+      '@floating-ui/dom': 1.7.1
       '@internationalized/date': 3.8.1
-      css.escape: 1.5.1
       esm-env: 1.2.2
-      runed: 0.28.0(svelte@5.31.1)
+      runed: 0.23.4(svelte@5.31.1)
       svelte: 5.31.1
-      svelte-toolbelt: 0.9.1(svelte@5.31.1)
+      svelte-toolbelt: 0.7.1(svelte@5.31.1)
       tabbable: 6.2.0
 
   blake3-wasm@2.1.5: {}
@@ -1906,8 +1901,6 @@ snapshots:
   cookie@0.6.0: {}
 
   cookie@0.7.2: {}
-
-  css.escape@1.5.1: {}
 
   d3-array@3.2.4:
     dependencies:
@@ -2230,7 +2223,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.41.0
       fsevents: 2.3.3
 
-  runed@0.28.0(svelte@5.31.1):
+  runed@0.23.4(svelte@5.31.1):
     dependencies:
       esm-env: 1.2.2
       svelte: 5.31.1
@@ -2292,7 +2285,7 @@ snapshots:
 
   stoppable@1.1.0: {}
 
-  style-to-object@1.0.8:
+  style-to-object@1.0.9:
     dependencies:
       inline-style-parser: 0.2.4
 
@@ -2321,11 +2314,11 @@ snapshots:
       pmtiles: 3.2.1
       svelte: 5.31.1
 
-  svelte-toolbelt@0.9.1(svelte@5.31.1):
+  svelte-toolbelt@0.7.1(svelte@5.31.1):
     dependencies:
       clsx: 2.1.1
-      runed: 0.28.0(svelte@5.31.1)
-      style-to-object: 1.0.8
+      runed: 0.23.4(svelte@5.31.1)
+      style-to-object: 1.0.9
       svelte: 5.31.1
 
   svelte@5.31.1:
